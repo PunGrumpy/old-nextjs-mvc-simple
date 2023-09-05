@@ -1,15 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 
 let prisma: PrismaClient
-let globalAny: any = global
+let global: any = {}
 
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV === 'production') {
   prisma = new PrismaClient()
 } else {
-  if (!globalAny.prisma) {
-    globalAny.prisma = new PrismaClient()
+  if (!global.prisma) {
+    global.prisma = new PrismaClient()
   }
-  prisma = globalAny.prisma
+  prisma = global.prisma
 }
-
 export default prisma
