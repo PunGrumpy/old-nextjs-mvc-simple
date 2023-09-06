@@ -1,5 +1,6 @@
 import prisma from '@/app/libs/prisma'
-import { NextRequest, NextResponse } from 'next/server'
+import { sendJSON } from '@/app/libs/util'
+import { NextRequest } from 'next/server'
 
 // GET /api/posts
 export async function GET() {
@@ -10,10 +11,10 @@ export async function GET() {
   })
 
   if (!posts) {
-    return NextResponse.json({ message: 'No posts found' }, { status: 404 })
+    return sendJSON({ message: 'No posts found' }, 404)
   }
 
-  return NextResponse.json({ message: 'All posts', posts }, { status: 200 })
+  return sendJSON({ posts }, 200)
 }
 
 // POST /api/posts
@@ -22,16 +23,13 @@ export async function POST(req: NextRequest) {
     await req.json()
 
   if (!reqBody) {
-    return NextResponse.json({ message: 'No data sent' }, { status: 400 })
+    return sendJSON({ message: 'No data sent' }, 400)
   }
 
   const { title, content, authorId } = reqBody
 
   if (!title || !content || !authorId) {
-    return NextResponse.json(
-      { message: 'Title, content and authorId are required' },
-      { status: 400 }
-    )
+    return sendJSON({ message: 'Missing title, content, or author ID' }, 400)
   }
 
   const post = await prisma.post.create({
@@ -42,5 +40,5 @@ export async function POST(req: NextRequest) {
     }
   })
 
-  return NextResponse.json({ message: 'Post created', post }, { status: 201 })
+  return sendJSON({ post }, 201)
 }

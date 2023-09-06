@@ -1,15 +1,16 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import prisma from '@/app/libs/prisma'
+import { sendJSON } from '@/app/libs/util'
 
 // GET /api/users
 export async function GET() {
   const users = await prisma.user.findMany()
 
   if (!users) {
-    return NextResponse.json({ message: 'No users found' }, { status: 404 })
+    return sendJSON({ message: 'No users found' }, 404)
   }
 
-  return NextResponse.json({ message: 'All users', users }, { status: 200 })
+  return sendJSON({ users }, 200)
 }
 
 // POST /api/users
@@ -17,16 +18,13 @@ export async function POST(req: NextRequest) {
   const reqBody: { name: string; email: string } = await req.json()
 
   if (!reqBody) {
-    return NextResponse.json({ message: 'No data sent' }, { status: 400 })
+    return sendJSON({ message: 'No data sent' }, 400)
   }
 
   const { name, email } = reqBody
 
   if (!name || !email) {
-    return NextResponse.json(
-      { message: 'Name and email are required' },
-      { status: 400 }
-    )
+    return sendJSON({ message: 'Missing name or email' }, 400)
   }
 
   const userExists = await prisma.user.findUnique({
@@ -34,10 +32,7 @@ export async function POST(req: NextRequest) {
   })
 
   if (userExists) {
-    return NextResponse.json(
-      { message: 'User with this email already exists' },
-      { status: 400 }
-    )
+    return sendJSON({ message: 'User already exists' }, 400)
   }
 
   const user = await prisma.user.create({
@@ -47,5 +42,5 @@ export async function POST(req: NextRequest) {
     }
   })
 
-  return NextResponse.json({ message: 'User created', user }, { status: 201 })
+  return sendJSON({ user }, 201)
 }

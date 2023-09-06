@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import prisma from '@/app/libs/prisma'
+import { sendJSON } from '@/app/libs/util'
 
 // GET /api/users/[id]
 export async function GET(req: NextRequest) {
@@ -9,7 +10,7 @@ export async function GET(req: NextRequest) {
   const id = pathname.split('/').pop()
 
   if (!id) {
-    return NextResponse.json({ message: 'No ID provided' }, { status: 400 })
+    return sendJSON({ message: 'No ID provided' }, 400)
   }
 
   const user = await prisma.user.findUnique({
@@ -17,10 +18,10 @@ export async function GET(req: NextRequest) {
   })
 
   if (!user) {
-    return NextResponse.json({ message: 'User not found' }, { status: 404 })
+    return sendJSON({ message: 'User not found' }, 404)
   }
 
-  return NextResponse.json({ message: 'User found', user }, { status: 200 })
+  return sendJSON({ user }, 200)
 }
 
 // PUT /api/users/[id]
@@ -31,7 +32,7 @@ export async function PUT(req: NextRequest) {
   const id = pathname.split('/').pop()
 
   if (!id) {
-    return NextResponse.json({ message: 'No ID provided' }, { status: 400 })
+    return sendJSON({ message: 'No ID provided' }, 400)
   }
 
   const user = await prisma.user.findUnique({
@@ -39,22 +40,19 @@ export async function PUT(req: NextRequest) {
   })
 
   if (!user) {
-    return NextResponse.json({ message: 'User not found' }, { status: 404 })
+    return sendJSON({ message: 'User not found' }, 404)
   }
 
   const reqBody: { name: string; email: string } = await req.json()
 
   if (!reqBody) {
-    return NextResponse.json({ message: 'No data sent' }, { status: 400 })
+    return sendJSON({ message: 'No data sent' }, 400)
   }
 
   const { name, email } = reqBody
 
   if (!name && !email) {
-    return NextResponse.json(
-      { message: 'Name and email are required' },
-      { status: 400 }
-    )
+    return sendJSON({ message: 'Missing name or email' }, 400)
   }
 
   const updatedUser = await prisma.user.update({
@@ -65,10 +63,7 @@ export async function PUT(req: NextRequest) {
     }
   })
 
-  return NextResponse.json(
-    { message: 'User updated', updatedUser },
-    { status: 200 }
-  )
+  return sendJSON({ updatedUser }, 200)
 }
 
 // DELETE /api/users/[id]
@@ -79,7 +74,7 @@ export async function DELETE(req: NextRequest) {
   const id = pathname.split('/').pop()
 
   if (!id) {
-    return NextResponse.json({ message: 'No ID provided' }, { status: 400 })
+    return sendJSON({ message: 'No ID provided' }, 400)
   }
 
   const user = await prisma.user.findUnique({
@@ -87,15 +82,12 @@ export async function DELETE(req: NextRequest) {
   })
 
   if (!user) {
-    return NextResponse.json({ message: 'User not found' }, { status: 404 })
+    return sendJSON({ message: 'User not found' }, 404)
   }
 
   const deletedUser = await prisma.user.delete({
     where: { id: Number(id) }
   })
 
-  return NextResponse.json(
-    { message: 'User deleted', deletedUser },
-    { status: 200 }
-  )
+  return sendJSON({ deletedUser }, 200)
 }

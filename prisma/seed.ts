@@ -4,8 +4,23 @@ const prisma = new PrismaClient()
 
 const userData: Prisma.UserCreateInput[] = [
   {
+    name: 'Admin',
+    email: 'admin@admin.com',
+    password: 'admin',
+    posts: {
+      create: [
+        {
+          title: 'Announcing to users',
+          content: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          published: true
+        }
+      ]
+    }
+  },
+  {
     name: 'Alice',
     email: 'alice@pingcap.com',
+    password: 'alice',
     posts: {
       create: [
         {
@@ -19,6 +34,7 @@ const userData: Prisma.UserCreateInput[] = [
   {
     name: 'Nilu',
     email: 'nilu@pingcap.com',
+    password: 'nilu',
     posts: {
       create: [
         {
@@ -32,6 +48,7 @@ const userData: Prisma.UserCreateInput[] = [
   {
     name: 'Mahmoud',
     email: 'mahmoud@pingcap.com',
+    password: 'mahmoud',
     posts: {
       create: [
         {

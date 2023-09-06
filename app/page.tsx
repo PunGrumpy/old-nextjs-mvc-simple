@@ -1,10 +1,19 @@
-import prisma from '@/app/lib/prisma'
+import prisma from '@/app/libs/prisma'
+import {
+  LoginButton,
+  LogoutButton,
+  ProfileButton,
+  RegisterButton
+} from '@/app/components/buttons.component'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/libs/auth'
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
     where: { published: true },
     include: { author: true }
   })
+  const session = await getServerSession(authOptions)
 
   return (
     <div className="bg-gray-900 min-h-screen flex flex-col items-center justify-center text-white">
@@ -13,7 +22,7 @@ export default async function Home() {
           Welcome to Next.js + Prisma Blog
         </h1>
       </header>
-      <main className="max-w-screen-lg w-full grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <main className="max-w-screen-lg mt-8 w-full grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {posts.map(post => (
           <article
             key={post.id}
@@ -31,6 +40,12 @@ export default async function Home() {
           </article>
         ))}
       </main>
+      <div className="mt-16 flex space-x-4">
+        <LoginButton />
+        <RegisterButton />
+        <LogoutButton />
+        <ProfileButton />
+      </div>
     </div>
   )
 }
