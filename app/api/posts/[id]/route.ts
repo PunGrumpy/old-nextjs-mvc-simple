@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+import prisma from '@/app/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 
 // GET /api/posts/[id]
