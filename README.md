@@ -61,9 +61,9 @@ pnpm dev
 ├── app
 │   ├── components
 │   ├── api
-│   ├── libs
-├── prisma
-│   └── migrations
+│   └── libs
+└── prisma
+    └── migrations
 ```
 
 ## `📝` Note
