@@ -93,7 +93,3 @@ pnpm dev
 ## `📝` License
 
 This project is under [MIT](LICENSE) License
-
-```
-
-```
