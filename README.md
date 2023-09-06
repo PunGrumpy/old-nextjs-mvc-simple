@@ -12,6 +12,8 @@ This is a simple project to learn Next Js with Prisma, Tailwind CSS, Postgres, a
 - [Next Js](https://nextjs.org/)
 - [Prisma](https://www.prisma.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Postgres](https://www.postgresql.org/)
+- [Next Auth](https://next-auth.js.org/)
 
 ## `📦` Installation
 
@@ -27,15 +29,22 @@ git clone git@github.com:PunGrumpy/nextjs-mvc-simple
 pnpm install
 ```
 
-3. Add `.env` file
+3. Add [.env](./.env.example) file
 
 ```bash
 cp .env.example .env
 ```
 
 ```env
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/nextjs-mvc-simple?schema=public"
+# PORT
 PORT=3000
+
+# POSTGRES
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/nextjs-mvc-simple
+
+# NEXT AUTH
+NEXTAUTH_SECRET=secret
+NEXTAUTH_URL=http://localhost:3000
 ```
 
 4. Run the development server
@@ -46,6 +55,44 @@ pnpm dev
 
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## `📂` Folder Structure
+
+```bash
+├── app
+│   ├── components
+│   ├── api
+│   ├── libs
+├── prisma
+│   ├── migrations
+```
+
+## `📝` Note
+
+- This project is not for production
+- This project is not for commercial use
+
+## `📝` Feature
+
+- [x] Login
+- [x] Register
+- [x] Logout
+- [x] Profile
+- [x] API
+  - [x] Get All Users
+  - [x] Get User By ID
+  - [x] Create User
+  - [x] Update User
+  - [x] Delete User
+  - [x] Get All Posts
+  - [x] Get Post By ID
+  - [x] Create Post
+  - [x] Update Post
+  - [x] Delete Post
+
 ## `📝` License
 
 This project is under [MIT](LICENSE) License
+
+```
+
+```
