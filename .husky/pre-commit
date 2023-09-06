@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+RESET='\033[0m'
+
+echo "${BOLD}${CYAN}Running pre-commit hook...${RESET}"
 pnpm lint
 pnpm format

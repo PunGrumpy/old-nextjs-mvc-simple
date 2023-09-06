@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "prisma:deploy": "prisma migrate dev",
+    "prisma:seed": "tsc prisma/seed.ts && node prisma/seed.js && rm prisma/seed.js",
+    "prisma:studio": "prisma studio",
     "lint": "next lint --max-warnings 0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
