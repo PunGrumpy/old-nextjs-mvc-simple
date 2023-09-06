@@ -63,7 +63,7 @@ pnpm dev
 │   ├── api
 │   ├── libs
 ├── prisma
-│   ├── migrations
+│   └── migrations
 ```
 
 ## `📝` Note
@@ -77,17 +77,18 @@ pnpm dev
 - [x] Register
 - [x] Logout
 - [x] Profile
-- [x] API
-  - [x] Get All Users
-  - [x] Get User By ID
-  - [x] Create User
-  - [x] Update User
-  - [x] Delete User
-  - [x] Get All Posts
-  - [x] Get Post By ID
-  - [x] Create Post
-  - [x] Update Post
-  - [x] Delete Post
+- [x] User
+  - [x] Create
+  - [x] Get All
+  - [x] Get By Id
+  - [x] Update
+  - [x] Delete
+- [x] Post
+  - [x] Create
+  - [x] Get All
+  - [x] Get By Id
+  - [x] Update
+  - [x] Delete
 
 ## `📝` License
 
