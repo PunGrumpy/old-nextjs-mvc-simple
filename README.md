@@ -1,11 +1,11 @@
 <div align="center">
-    <h1>Next Js MVC</h1>
-    <p>Next Js with Prisma, Tailwind CSS, and MVC Pattern</p>
+    <h1><code>▲</code> Next Js MVC</h1>
+    <p>Next Js with Prisma, Tailwind CSS, Postgres, and MVC Pattern</p>
 </div>
 
 ## `📝` About
 
-This is a simple project to learn Next Js with Prisma, Tailwind CSS, and MVC Pattern.
+This is a simple project to learn Next Js with Prisma, Tailwind CSS, Postgres, and MVC Pattern
 
 ## `📚` Stack
 
