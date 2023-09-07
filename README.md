@@ -57,6 +57,32 @@ pnpm dev
 
 6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## `📝` API Documentation
+
+1. Run the development server
+
+```bash
+pnpm dev
+```
+
+2. Open [http://localhost:3000/api-doc](http://localhost:3000/api-doc) with your browser to see the result.
+
+## `🏢` Database
+
+1. Move to docker folder
+
+```bash
+cd docker
+```
+
+2. Run docker compose
+
+```bash
+docker compose up -d
+```
+
+3. Open [http://localhost:5431](http://localhost:5431) with your browser to see the result.
+
 ## `📂` Folder Structure
 
 ```bash
