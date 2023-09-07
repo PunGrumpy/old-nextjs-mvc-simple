@@ -92,6 +92,7 @@ docker compose up -d
 │   │   ├── post
 │   │   └── user
 │   └── api-doc
+├── docker
 ├── lib
 ├── model
 └── prisma
