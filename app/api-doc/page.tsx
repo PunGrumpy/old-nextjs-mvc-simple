@@ -7,9 +7,11 @@ export default async function Page() {
   return (
     <section className="bg-[url('/images/wallpaper-swagger.png')] bg-fixed min-h-screen text-white font-serif">
       <div className="container mx-auto py-16">
-        <h1 className="text-4xl font-extrabold text-white mb-8">
-          API Documentation
-        </h1>
+        <header className="text-center">
+          <h1 className="text-4xl font-extrabold text-white mb-8">
+            API Documentation
+          </h1>
+        </header>
         <ReactSwagger spec={spec} />
       </div>
     </section>
