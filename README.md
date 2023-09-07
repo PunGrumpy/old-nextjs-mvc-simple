@@ -5,7 +5,7 @@
 
 ## `📝` About
 
-This is a simple project to learn Next Js with Prisma, Tailwind CSS, Postgres, and MVC Pattern
+This is a simple project to learn Next Js with Prisma, Tailwind CSS, Postgres, Swagger, and MVC Pattern
 
 ## `📚` Stack
 
@@ -13,6 +13,7 @@ This is a simple project to learn Next Js with Prisma, Tailwind CSS, Postgres, a
 - [Prisma](https://www.prisma.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Postgres](https://www.postgresql.org/)
+- [Swagger](https://swagger.io/)
 
 ## `📦` Installation
 
@@ -62,7 +63,11 @@ pnpm dev
 ├── app
 │   ├── components
 │   ├── api
-│   └── libs
+│   │   ├── post
+│   │   └── user
+│   └── api-doc
+├── lib
+├── model
 └── prisma
     └── migrations
 ```

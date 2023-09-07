@@ -2,7 +2,19 @@ import prisma from '@/lib/prisma'
 import { sendJSON } from '@/lib/utils'
 import { NextRequest } from 'next/server'
 
-// GET /api/user
+/**
+ * @swagger
+ * /api/user:
+ *  get:
+ *    tags:
+ *      - User
+ *    description: Get all users
+ *    responses:
+ *     200:
+ *      description: Users found
+ *     404:
+ *      description: No users found
+ */
 export async function GET() {
   const users = await prisma.user.findMany()
 
@@ -13,7 +25,28 @@ export async function GET() {
   return sendJSON(users, 200)
 }
 
-// POST /api/user
+/**
+ * @swagger
+ * /api/user:
+ *  post:
+ *    tags:
+ *      - User
+ *    description: Create a new user
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/User'
+ *          example:
+ *            name: 'John Doe'
+ *            email: 'john@doe.com'
+ *    responses:
+ *      201:
+ *        description: User created
+ *      400:
+ *        description: Missing name or email
+ *
+ */
 export async function POST(req: NextRequest) {
   const reqBody: User = await req.json()
   const { name, email } = reqBody

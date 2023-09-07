@@ -2,7 +2,30 @@ import prisma from '@/lib/prisma'
 import { sendJSON } from '@/lib/utils'
 import { NextRequest } from 'next/server'
 
-// GET /api/user/[id]
+/**
+ * @swagger
+ * /api/user/{id}:
+ *  get:
+ *    tags:
+ *      - User
+ *    description: Get a user by ID
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: User ID
+ *    schema:
+ *      $ref: '#/components/schemas/User'
+ *    example:
+ *      id: 1
+ *    responses:
+ *      200:
+ *        description: User found
+ *      400:
+ *        description: No ID provided
+ *      404:
+ *        description: User not found
+ */
 export async function GET(req: NextRequest) {
   const { pathname } = req.nextUrl
   const id = pathname.split('/').pop()
@@ -22,7 +45,34 @@ export async function GET(req: NextRequest) {
   return sendJSON(user, 200)
 }
 
-// PUT /api/user/[id]
+/**
+ * @swagger
+ * /api/user/{id}:
+ *  put:
+ *    tags:
+ *      - User
+ *    description: Update a user by ID
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: User ID
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/User'
+ *          example:
+ *            name: 'John Doe'
+ *            email: 'john@change.com'
+ *    responses:
+ *      200:
+ *        description: User updated
+ *      400:
+ *        description: Missing name or email
+ *      404:
+ *        description: User not found
+ */
 export async function PUT(req: NextRequest) {
   const { pathname } = req.nextUrl
   const id = pathname.split('/').pop()
@@ -65,7 +115,28 @@ export async function PUT(req: NextRequest) {
   return sendJSON(updatedUser, 200)
 }
 
-// DELETE /api/user/[id]
+/**
+ * @swagger
+ * /api/user/{id}:
+ *  delete:
+ *    tags:
+ *      - User
+ *    description: Delete a user by ID
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: User ID
+ *    example:
+ *      id: 1
+ *    responses:
+ *      200:
+ *        description: User deleted
+ *      400:
+ *        description: No ID provided
+ *      404:
+ *        description: User not found
+ */
 export async function DELETE(req: NextRequest) {
   const { pathname } = req.nextUrl
   const id = pathname.split('/').pop()

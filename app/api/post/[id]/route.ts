@@ -2,7 +2,30 @@ import prisma from '@/lib/prisma'
 import { sendJSON } from '@/lib/utils'
 import { NextRequest } from 'next/server'
 
-// GET /api/post/[id]
+/**
+ * @swagger
+ * /api/post/{id}:
+ *  get:
+ *    tags:
+ *      - Post
+ *    description: Get a post by ID
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Post ID
+ *    schema:
+ *      $ref: '#/components/schemas/Post'
+ *    example:
+ *      id: 1
+ *    responses:
+ *      200:
+ *        description: Post found
+ *      400:
+ *        description: No ID provided
+ *      404:
+ *        description: Post not found
+ */
 export async function GET(req: NextRequest) {
   const { pathname } = req.nextUrl
   const id = pathname.split('/').pop()
@@ -22,7 +45,34 @@ export async function GET(req: NextRequest) {
   return sendJSON(post, 200)
 }
 
-// PUT /api/post/[id]
+/**
+ * @swagger
+ * /api/post/{id}:
+ *  put:
+ *    tags:
+ *      - Post
+ *    description: Update a post by ID
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Post ID
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Post'
+ *          example:
+ *            title: 'My first post'
+ *            content: 'Hello world!'
+ *    responses:
+ *      200:
+ *        description: Post updated
+ *      400:
+ *        description: Missing title or content
+ *      404:
+ *        description: Post not found
+ */
 export async function PUT(req: NextRequest) {
   const { pathname } = req.nextUrl
   const id = pathname.split('/').pop()
@@ -57,7 +107,26 @@ export async function PUT(req: NextRequest) {
   return sendJSON(updatedPost, 200)
 }
 
-// DELETE /api/post/[id]
+/**
+ * @swagger
+ * /api/post/{id}:
+ *  delete:
+ *    tags:
+ *      - Post
+ *    description: Delete a post by ID
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: Post ID
+ *    responses:
+ *      200:
+ *        description: Post deleted
+ *      400:
+ *        description: No ID provided
+ *      404:
+ *        description: Post not found
+ */
 export async function DELETE(req: NextRequest) {
   const { pathname } = req.nextUrl
   const id = pathname.split('/').pop()
