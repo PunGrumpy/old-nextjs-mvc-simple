@@ -23,26 +23,6 @@ services:
     ports:
       - 5431:80
 
-  prometheus:
-    container_name: prometheus
-    image: prom/prometheus:latest
-    volumes:
-      - ./prometheus:/etc/prometheus
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-    ports:
-      - 9090:9090
-
-  grafana:
-    container_name: grafana
-    image: grafana/grafana:latest
-    restart: always
-    environment:
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: admin
-    ports:
-      - 9091:3000
-
 volumes:
   db_data:
     driver: local
