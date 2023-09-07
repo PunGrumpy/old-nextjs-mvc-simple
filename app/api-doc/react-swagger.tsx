@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import SwaggerUi from 'swagger-ui-react'
 import 'swagger-ui-react/swagger-ui.css'
 
@@ -9,8 +10,8 @@ type Props = {
 
 export default function ReactSwagger({ spec }: Props) {
   return (
-    <div className="bg-gray-900 rounded-lg shadow-lg p-4">
-      <SwaggerUi spec={spec} />
+    <div className="bg-opacity-75 bg-black backdrop-blur-lg rounded-lg shadow-lg p-4 bg-cover transition-transform ease-in-out">
+      <SwaggerUi spec={spec} docExpansion="list" deepLinking />
     </div>
   )
 }
