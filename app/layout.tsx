@@ -1,13 +1,13 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { NextAuthProvider } from './providers'
 
-export const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Next js and Prisma',
-  description: 'Next js and Prisma MVC'
+  description: 'Next js and Prisma MVC',
+  themeColor: '#1d1d1d'
 }
 
 export default function RootLayout({
@@ -17,9 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <NextAuthProvider>{children}</NextAuthProvider>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }

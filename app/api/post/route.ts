@@ -1,8 +1,8 @@
 import prisma from '@/lib/prisma'
-import { sendJSON } from '@/lib/util'
+import { sendJSON } from '@/lib/utils'
 import { NextRequest } from 'next/server'
 
-// GET /api/posts
+// GET /api/post
 export async function GET() {
   const posts = await prisma.post.findMany({
     include: {
@@ -11,25 +11,27 @@ export async function GET() {
   })
 
   if (!posts) {
-    return sendJSON({ message: 'No posts found' }, 404)
+    return sendJSON({ error: 'No posts found' }, 404)
   }
 
-  return sendJSON({ posts }, 200)
+  return sendJSON(posts, 200)
 }
 
-// POST /api/posts
+// POST /api/post
 export async function POST(req: NextRequest) {
-  const reqBody: { title: string; content: string; authorId: number } =
-    await req.json()
-
-  if (!reqBody) {
-    return sendJSON({ message: 'No data sent' }, 400)
-  }
-
+  const reqBody: Post = await req.json()
   const { title, content, authorId } = reqBody
 
   if (!title || !content || !authorId) {
-    return sendJSON({ message: 'Missing title, content, or author ID' }, 400)
+    return sendJSON({ error: 'Missing title, content, or author ID' }, 400)
+  }
+
+  const existingUser = await prisma.user.findUnique({
+    where: { id: authorId }
+  })
+
+  if (!existingUser) {
+    return sendJSON({ error: 'User not found' }, 404)
   }
 
   const post = await prisma.post.create({
@@ -40,5 +42,5 @@ export async function POST(req: NextRequest) {
     }
   })
 
-  return sendJSON({ post }, 201)
+  return sendJSON(post, 201)
 }

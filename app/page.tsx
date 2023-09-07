@@ -1,19 +1,10 @@
 import prisma from '@/lib/prisma'
-import {
-  LoginButton,
-  LogoutButton,
-  ProfileButton,
-  RegisterButton
-} from '@/app/components/buttons.component'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
     where: { published: true },
     include: { author: true }
   })
-  const session = await getServerSession(authOptions)
 
   let numCols = 1
   if (posts.length > 1) {
@@ -28,15 +19,11 @@ export default async function Home() {
             <h1 className="text-5xl font-extrabold text-indigo-100">
               Welcome to Next.js + Prisma Blog
             </h1>
-            <div className="flex items-center gap-4">
-              {session ? <LogoutButton /> : <LoginButton />}
-              {session ? <ProfileButton /> : <RegisterButton />}
-            </div>
           </div>
         </div>
       </header>
       <main
-        className={`max-w-screen-xl mx-auto mt-8 w-full grid grid-cols-1 gap-6 md:grid-cols-${numCols}`}
+        className={`max-w-screen-xl mx-auto mt-16 w-full grid grid-cols-1 gap-6 md:grid-cols-${numCols}`}
       >
         {posts.map(post => (
           <article

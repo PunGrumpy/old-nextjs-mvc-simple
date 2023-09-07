@@ -13,7 +13,6 @@ This is a simple project to learn Next Js with Prisma, Tailwind CSS, Postgres, a
 - [Prisma](https://www.prisma.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Postgres](https://www.postgresql.org/)
-- [Next Auth](https://next-auth.js.org/)
 
 ## `📦` Installation
 
@@ -41,19 +40,21 @@ PORT=3000
 
 # POSTGRES
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/nextjs-mvc-simple
-
-# NEXT AUTH
-NEXTAUTH_SECRET=secret
-NEXTAUTH_URL=http://localhost:3000
 ```
 
-4. Run the development server
+4. Run the migration
+
+```bash
+pnpm migrate:deploy
+```
+
+5. Run the development server
 
 ```bash
 pnpm dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## `📂` Folder Structure
 
@@ -73,10 +74,6 @@ pnpm dev
 
 ## `📝` Feature
 
-- [x] Login
-- [x] Register
-- [x] Logout
-- [x] Profile
 - [x] User
   - [x] Create
   - [x] Get All
