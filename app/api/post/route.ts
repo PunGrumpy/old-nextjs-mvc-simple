@@ -1,5 +1,5 @@
-import prisma from '@/app/libs/prisma'
-import { sendJSON } from '@/app/libs/util'
+import prisma from '@/lib/prisma'
+import { sendJSON } from '@/lib/util'
 import { NextRequest } from 'next/server'
 
 // GET /api/posts

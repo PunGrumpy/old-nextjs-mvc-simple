@@ -1,5 +1,5 @@
-import { authOptions } from '@/app/libs/auth'
-import { sendJSON } from '@/app/libs/util'
+import { authOptions } from '@/lib/auth'
+import { sendJSON } from '@/lib/util'
 import { getServerSession } from 'next-auth'
 import { NextRequest } from 'next/server'
 

@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server'
-import prisma from '@/app/libs/prisma'
-import { sendJSON } from '@/app/libs/util'
+import prisma from '@/lib/prisma'
+import { sendJSON } from '@/lib/util'
 
 // GET /api/users
 export async function GET() {

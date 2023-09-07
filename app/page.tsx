@@ -1,4 +1,4 @@
-import prisma from '@/app/libs/prisma'
+import prisma from '@/lib/prisma'
 import {
   LoginButton,
   LogoutButton,
@@ -6,7 +6,7 @@ import {
   RegisterButton
 } from '@/app/components/buttons.component'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/libs/auth'
+import { authOptions } from '@/lib/auth'
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
