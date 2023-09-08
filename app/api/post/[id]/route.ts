@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
-import { sendJSON } from '@/lib/utils'
 import { Post } from '@prisma/client'
 import { NextRequest } from 'next/server'
+import { ResponseJSON } from '@/lib/utils'
 
 /**
  * @swagger
@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
   const id = pathname.split('/').pop()
 
   if (!id) {
-    return sendJSON({ error: 'No ID provided' }, 400)
+    return ResponseJSON({ error: 'No ID provided' }, 400)
   }
 
   const post = await prisma.post.findUnique({
@@ -40,10 +40,10 @@ export async function GET(req: NextRequest) {
   })
 
   if (!post) {
-    return sendJSON({ error: 'Post not found' }, 404)
+    return ResponseJSON({ error: 'Post not found' }, 404)
   }
 
-  return sendJSON(post, 200)
+  return ResponseJSON(post, 200)
 }
 
 /**
@@ -79,7 +79,7 @@ export async function PUT(req: NextRequest) {
   const id = pathname.split('/').pop()
 
   if (!id) {
-    return sendJSON({ error: 'No ID provided' }, 400)
+    return ResponseJSON({ error: 'No ID provided' }, 400)
   }
 
   const post = await prisma.post.findUnique({
@@ -87,14 +87,14 @@ export async function PUT(req: NextRequest) {
   })
 
   if (!post) {
-    return sendJSON({ error: 'Post not found' }, 404)
+    return ResponseJSON({ error: 'Post not found' }, 404)
   }
 
   const reqBody: Post = await req.json()
   const { title, content } = reqBody
 
   if (!title && !content) {
-    return sendJSON({ message: 'Missing title or content' }, 400)
+    return ResponseJSON({ message: 'Missing title or content' }, 400)
   }
 
   const updatedPost = await prisma.post.update({
@@ -105,7 +105,7 @@ export async function PUT(req: NextRequest) {
     }
   })
 
-  return sendJSON(updatedPost, 200)
+  return ResponseJSON(updatedPost, 200)
 }
 
 /**
@@ -133,7 +133,7 @@ export async function DELETE(req: NextRequest) {
   const id = pathname.split('/').pop()
 
   if (!id) {
-    return sendJSON({ error: 'No ID provided' }, 400)
+    return ResponseJSON({ error: 'No ID provided' }, 400)
   }
 
   const post = await prisma.post.findUnique({
@@ -141,12 +141,12 @@ export async function DELETE(req: NextRequest) {
   })
 
   if (!post) {
-    return sendJSON({ error: 'Post not found' }, 404)
+    return ResponseJSON({ error: 'Post not found' }, 404)
   }
 
   const deletedPost = await prisma.post.delete({
     where: { id: Number(id) }
   })
 
-  return sendJSON(deletedPost, 200)
+  return ResponseJSON(deletedPost, 200)
 }

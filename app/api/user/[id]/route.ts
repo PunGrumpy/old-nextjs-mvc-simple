@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
-import { sendJSON } from '@/lib/utils'
 import { User } from '@prisma/client'
 import { NextRequest } from 'next/server'
+import { ResponseJSON } from '@/lib/utils'
 
 /**
  * @swagger
@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
   const id = pathname.split('/').pop()
 
   if (!id) {
-    return sendJSON({ error: 'No ID provided' }, 400)
+    return ResponseJSON({ error: 'No ID provided' }, 400)
   }
 
   const user = await prisma.user.findUnique({
@@ -40,10 +40,10 @@ export async function GET(req: NextRequest) {
   })
 
   if (!user) {
-    return sendJSON({ error: 'User not found' }, 404)
+    return ResponseJSON({ error: 'User not found' }, 404)
   }
 
-  return sendJSON(user, 200)
+  return ResponseJSON(user, 200)
 }
 
 /**
@@ -79,7 +79,7 @@ export async function PUT(req: NextRequest) {
   const id = pathname.split('/').pop()
 
   if (!id) {
-    return sendJSON({ error: 'No ID provided' }, 400)
+    return ResponseJSON({ error: 'No ID provided' }, 400)
   }
 
   const user = await prisma.user.findUnique({
@@ -87,14 +87,14 @@ export async function PUT(req: NextRequest) {
   })
 
   if (!user) {
-    return sendJSON({ error: 'User not found' }, 404)
+    return ResponseJSON({ error: 'User not found' }, 404)
   }
 
   const reqBody: User = await req.json()
   const { name, email } = reqBody
 
   if (!name && !email) {
-    return sendJSON({ error: 'Missing name or email' }, 400)
+    return ResponseJSON({ error: 'Missing name or email' }, 400)
   }
 
   const existingUser = await prisma.user.findUnique({
@@ -102,7 +102,7 @@ export async function PUT(req: NextRequest) {
   })
 
   if (existingUser && existingUser.id !== Number(id)) {
-    return sendJSON({ error: 'User already exists' }, 400)
+    return ResponseJSON({ error: 'User already exists' }, 400)
   }
 
   const updatedUser = await prisma.user.update({
@@ -113,7 +113,7 @@ export async function PUT(req: NextRequest) {
     }
   })
 
-  return sendJSON(updatedUser, 200)
+  return ResponseJSON(updatedUser, 200)
 }
 
 /**
@@ -143,7 +143,7 @@ export async function DELETE(req: NextRequest) {
   const id = pathname.split('/').pop()
 
   if (!id) {
-    return sendJSON({ error: 'No ID provided' }, 400)
+    return ResponseJSON({ error: 'No ID provided' }, 400)
   }
 
   const user = await prisma.user.findUnique({
@@ -151,12 +151,12 @@ export async function DELETE(req: NextRequest) {
   })
 
   if (!user) {
-    return sendJSON({ error: 'User not found' }, 404)
+    return ResponseJSON({ error: 'User not found' }, 404)
   }
 
   const deletedUser = await prisma.user.delete({
     where: { id: Number(id) }
   })
 
-  return sendJSON(deletedUser, 200)
+  return ResponseJSON(deletedUser, 200)
 }

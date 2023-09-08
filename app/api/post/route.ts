@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
-import { sendJSON } from '@/lib/utils'
 import { Post } from '@prisma/client'
 import { NextRequest } from 'next/server'
+import { ResponseJSON } from '@/lib/utils'
 
 /**
  * @swagger
@@ -24,10 +24,10 @@ export async function GET() {
   })
 
   if (!posts) {
-    return sendJSON({ error: 'No posts found' }, 404)
+    return ResponseJSON({ error: 'No posts found' }, 404)
   }
 
-  return sendJSON(posts, 200)
+  return ResponseJSON(posts, 200)
 }
 
 /**
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
   const { title, content, authorId } = reqBody
 
   if (!title || !content || !authorId) {
-    return sendJSON({ error: 'Missing title, content, or author ID' }, 400)
+    return ResponseJSON({ error: 'Missing title, content, or author ID' }, 400)
   }
 
   const existingUser = await prisma.user.findUnique({
@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
   })
 
   if (!existingUser) {
-    return sendJSON({ error: 'User not found' }, 404)
+    return ResponseJSON({ error: 'User not found' }, 404)
   }
 
   const post = await prisma.post.create({
@@ -77,5 +77,5 @@ export async function POST(req: NextRequest) {
     }
   })
 
-  return sendJSON(post, 201)
+  return ResponseJSON(post, 201)
 }
