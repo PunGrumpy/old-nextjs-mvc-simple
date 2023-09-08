@@ -56,6 +56,10 @@ pnpm migrate:deploy
 pnpm dev
 ```
 
+```bash
+pnpm dev:turbo # Turbo mode (Swagger is not available)
+```
+
 6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## `📝` API Documentation
