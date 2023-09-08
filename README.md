@@ -1,6 +1,7 @@
 <div align="center">
     <h1><code>▲</code> Next Js MVC</h1>
     <p>Next Js with Prisma, Tailwind CSS, Postgres, and MVC Pattern</p>
+    <img src="./.github/images/screenshot-homepage.png" alt="Screenshot Homepage" />
 </div>
 
 ## `📝` About

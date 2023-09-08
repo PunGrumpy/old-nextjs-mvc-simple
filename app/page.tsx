@@ -1,5 +1,5 @@
-import prisma from '@/lib/prisma'
 import Link from 'next/link'
+import prisma from '@/lib/prisma'
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
@@ -19,9 +19,9 @@ export default async function Home() {
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center py-4">
               <div className="flex items-center">
-                <a href="#" className="text-white text-2xl font-bold">
+                <Link href="#" className="text-white text-2xl font-bold">
                   Next.js + Prisma
-                </a>
+                </Link>
               </div>
               <div className="hidden md:flex space-x-4">
                 <Link
@@ -47,13 +47,11 @@ export default async function Home() {
           </div>
         </nav>
       </header>
-      <main
-        className={`max-w-screen-xl mx-auto mt-16 w-full grid grid-cols-1 gap-6 md:grid-cols-${numCols} backdrop-blur-lg`}
-      >
+      <main className="max-w-screen-xl mx-auto mt-16 w-full grid grid-cols-1 gap-6 md:grid-cols-${numCols} backdrop-blur-lg">
         {posts.map(post => (
           <article
             key={post.id}
-            className="bg-gray-950 bg-opacity-70 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-transform duration-300 ease-in-out"
+            className="bg-indigo-950 bg-opacity-75 rounded-xl backdrop-blur-lg shadow-xl hover:shadow-2xl transition-transform duration-300 ease-in-out transform hover:scale-105"
           >
             <div className="p-6">
               <h2 className="text-xl font-semibold text-indigo-300">
@@ -61,8 +59,10 @@ export default async function Home() {
               </h2>
               <p className="mt-2 text-gray-400">{post.content}</p>
             </div>
-            <div className="p-4 bg-gray-700 bg-opacity-[65%]">
-              <p className="text-sm text-indigo-300">By {post.author?.name}</p>
+            <div className="p-4 bg-black bg-opacity-20 rounded-b-xl">
+              {(post.author && (
+                <p className="text-sm text-indigo-300">By {post.author.name}</p>
+              )) || <p className="text-sm text-indigo-300">By Anonymous</p>}
             </div>
           </article>
         ))}
