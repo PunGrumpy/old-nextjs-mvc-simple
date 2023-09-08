@@ -66,6 +66,10 @@ pnpm dev
 pnpm dev
 ```
 
+```bash
+pnpm dev:turbo # Turbo mode (Swagger is not available)
+```
+
 2. Open [http://localhost:3000/api-doc](http://localhost:3000/api-doc) with your browser to see the result.
 
 ## `🏢` Database
