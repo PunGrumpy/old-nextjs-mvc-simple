@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
 import { Post } from '@prisma/client'
-import { NextRequest } from 'next/server'
 import { ResponseJSON } from '@/lib/utils'
+import { type NextRequest } from 'next/server'
 
 /**
  * @swagger
@@ -53,9 +53,8 @@ export async function GET() {
  *      400:
  *        description: Missing title, content, or author ID
  */
-export async function POST(req: NextRequest) {
-  const reqBody: Post = await req.json()
-  const { title, content, authorId } = reqBody
+export async function POST(request: NextRequest) {
+  const { title, content, authorId }: Post = await request.json()
 
   if (!title || !content || !authorId) {
     return ResponseJSON({ error: 'Missing title, content, or author ID' }, 400)

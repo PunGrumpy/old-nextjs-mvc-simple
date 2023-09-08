@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
 import { Post } from '@prisma/client'
-import { NextRequest } from 'next/server'
 import { ResponseJSON } from '@/lib/utils'
+import { type NextRequest } from 'next/server'
 
 /**
  * @swagger
@@ -27,9 +27,8 @@ import { ResponseJSON } from '@/lib/utils'
  *      404:
  *        description: Post not found
  */
-export async function GET(req: NextRequest) {
-  const { pathname } = req.nextUrl
-  const id = pathname.split('/').pop()
+export async function GET({ params }: { params: { id: string } }) {
+  const { id } = params
 
   if (!id) {
     return ResponseJSON({ error: 'No ID provided' }, 400)
@@ -74,9 +73,11 @@ export async function GET(req: NextRequest) {
  *      404:
  *        description: Post not found
  */
-export async function PUT(req: NextRequest) {
-  const { pathname } = req.nextUrl
-  const id = pathname.split('/').pop()
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const { id } = params
 
   if (!id) {
     return ResponseJSON({ error: 'No ID provided' }, 400)
@@ -90,8 +91,7 @@ export async function PUT(req: NextRequest) {
     return ResponseJSON({ error: 'Post not found' }, 404)
   }
 
-  const reqBody: Post = await req.json()
-  const { title, content } = reqBody
+  const { title, content }: Post = await request.json()
 
   if (!title && !content) {
     return ResponseJSON({ message: 'Missing title or content' }, 400)
@@ -128,9 +128,8 @@ export async function PUT(req: NextRequest) {
  *      404:
  *        description: Post not found
  */
-export async function DELETE(req: NextRequest) {
-  const { pathname } = req.nextUrl
-  const id = pathname.split('/').pop()
+export async function DELETE({ params }: { params: { id: string } }) {
+  const { id } = params
 
   if (!id) {
     return ResponseJSON({ error: 'No ID provided' }, 400)

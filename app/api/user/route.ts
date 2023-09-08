@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
 import { User } from '@prisma/client'
-import { NextRequest } from 'next/server'
 import { ResponseJSON } from '@/lib/utils'
+import { type NextRequest } from 'next/server'
 
 /**
  * @swagger
@@ -48,9 +48,8 @@ export async function GET() {
  *        description: Missing name or email
  *
  */
-export async function POST(req: NextRequest) {
-  const reqBody: User = await req.json()
-  const { name, email } = reqBody
+export async function POST(request: NextRequest) {
+  const { name, email }: User = await request.json()
 
   if (!name || !email) {
     return ResponseJSON({ error: 'Missing name or email' }, 400)
