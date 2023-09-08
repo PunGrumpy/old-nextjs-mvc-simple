@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 import { Post } from '@prisma/client'
-import { ResponseJSON } from '@/lib/utils'
+import { ResponseJSON } from '@/lib/http'
 import { type NextRequest } from 'next/server'
 
 /**
