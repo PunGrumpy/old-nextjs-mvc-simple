@@ -1,26 +1,47 @@
-import Link from 'next/link'
+'use client'
 
-export default function Home() {
+import { Header } from '@/components/header.component'
+import { apiEndpoints } from '@/lib/api.endpoint'
+
+export default function Page() {
   return (
-    <div className="bg-[url('/images/wallpaper-swagger.png')] bg-fixed min-h-screen flex flex-col items-center justify-center text-white">
-      <header className="text-center flex flex-col items-center">
-        <div className="backdrop-blur-lg p-8 rounded-xl bg-black bg-opacity-70">
-          <h1 className="text-5xl font-extrabold text-white mb-4">
-            Welcome to Our API
-          </h1>
-          <p className="text-indigo-100 text-lg mb-8">
-            Explore our API documentation to get started.
-          </p>
-          <div className="flex items-center justify-center">
-            <Link
-              href="/api-doc"
-              className="bg-indigo-950 bg-opacity-70 backdrop-blur-lg hover:bg-indigo-600 hover:bg-opacity-80 text-white py-2 px-6 rounded-md text-lg transition duration-300 ease-in-out transform hover:scale-105"
-            >
-              API Documentation
-            </Link>
+    <div className="bg-[url('/images/wallpaper-swagger.png')] min-h-screen text-white">
+      <Header />
+      <main className="max-w-screen-xl mx-auto my-16 py-6 px-4 sm:px-6 lg:px-8">
+        <div className="bg-indigo-950 p-6 rounded-lg shadow-xl backdrop-blur-lg bg-opacity-80">
+          <h2 className="text-3xl font-semibold text-white mb-6">
+            Available API Endpoints
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead>
+                <tr>
+                  <th className="px-4 py-3 text-left text-indigo-400">
+                    Method
+                  </th>
+                  <th className="px-4 py-3 text-left text-indigo-400">Path</th>
+                  <th className="px-4 py-3 text-left text-indigo-400">
+                    Description
+                  </th>
+                  <th className="px-4 py-3 text-left text-indigo-400">
+                    Response
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {apiEndpoints.map((endpoint, index) => (
+                  <tr key={index}>
+                    <td className="px-4 py-3">{endpoint.method}</td>
+                    <td className="px-4 py-3">{endpoint.path}</td>
+                    <td className="px-4 py-3">{endpoint.description}</td>
+                    <td className="px-4 py-3">{endpoint.response}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
-      </header>
+      </main>
     </div>
   )
 }
