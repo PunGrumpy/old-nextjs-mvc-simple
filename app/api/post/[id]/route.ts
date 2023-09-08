@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma'
 import { sendJSON } from '@/lib/utils'
+import { Post } from '@prisma/client'
 import { NextRequest } from 'next/server'
 
 /**
