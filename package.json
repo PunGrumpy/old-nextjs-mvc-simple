@@ -7,7 +7,7 @@
     "dev:turbo": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "prisma:deploy": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate dev && prisma generate",
     "prisma:studio": "prisma studio",
     "lint": "next lint --max-warnings 0",
     "format": "prettier --write .",
